@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using BanEnemyMod.BanEnemyModCode.Infrastructure;
 using BanEnemyMod.BanEnemyModCode.Localization;
 using BanEnemyMod.BanEnemyModCode.Models;
 using MegaCrit.Sts2.Core.Models;
@@ -99,6 +100,9 @@ internal static class BanEnemyConfigStore
         lock (Sync)
         {
             _pendingRunModifiers = modifiers.Select(CloneModifier).ToList();
+            int snapshotCount = _pendingRunModifiers.OfType<BanEncounterSnapshotModifier>().Count();
+            HookTrace.Write(
+                $"Captured pending run modifiers. total={_pendingRunModifiers.Count}, snapshotModifiers={snapshotCount}, netType={RunManager.Instance?.NetService?.Type}");
         }
     }
 
@@ -114,6 +118,7 @@ internal static class BanEnemyConfigStore
             }
 
             source.Add(BanEncounterSnapshotModifier.CreateFromEncounterIds(EnsureLoaded().BannedEncounterIds));
+            HookTrace.Write($"Merged snapshot modifier into modifier list. total={source.Count}");
             return source;
         }
     }
@@ -128,6 +133,8 @@ internal static class BanEnemyConfigStore
             _activeBannedEncounterIds = snapshotModifier != null
                 ? new HashSet<string>(snapshotModifier.GetBannedEncounterIds(), StringComparer.Ordinal)
                 : new HashSet<string>(EnsureLoaded().BannedEncounterIds, StringComparer.Ordinal);
+            HookTrace.Write(
+                $"Activating run snapshot from modifiers. sourceCount={source.Count}, snapshotPresent={snapshotModifier != null}, bannedCount={_activeBannedEncounterIds.Count}, netType={RunManager.Instance?.NetService?.Type}");
             _pendingRunModifiers = null;
             return source.Where(modifier => modifier is not BanEncounterSnapshotModifier).ToList();
         }
@@ -140,11 +147,13 @@ internal static class BanEnemyConfigStore
             BanEncounterSnapshotModifier? snapshotModifier = runState.Modifiers.OfType<BanEncounterSnapshotModifier>().FirstOrDefault();
             if (snapshotModifier == null)
             {
+                HookTrace.Write("TryActivateRunSnapshot found no snapshot modifier on RunState.");
                 return;
             }
 
             _activeBannedEncounterIds = new HashSet<string>(snapshotModifier.GetBannedEncounterIds(), StringComparer.Ordinal);
             _pendingRunModifiers = null;
+            HookTrace.Write($"Activated run snapshot from RunState. bannedCount={_activeBannedEncounterIds.Count}");
         }
     }
 
