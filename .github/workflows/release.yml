@@ -50,6 +50,7 @@ jobs:
             ### Downloads
 
             - GitHub latest release: https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest
+            - Cloudflare latest download: https://mods.965105.xyz/BanEnemyMod-latest.zip
 
             ## 中文
 
@@ -63,6 +64,7 @@ jobs:
             ### 下载地址
 
             - GitHub 最新版本：https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest
+            - Cloudflare 最新下载：https://mods.965105.xyz/BanEnemyMod-latest.zip
 
       - name: Move latest tag
         shell: bash
@@ -85,9 +87,15 @@ jobs:
 
             This release always points to the newest build.
 
+            Latest direct download:
+            https://mods.965105.xyz/BanEnemyMod-latest.zip
+
             ## 中文
 
             这个 release 永远指向当前最新版本。
+
+            最新直链下载：
+            https://mods.965105.xyz/BanEnemyMod-latest.zip
 
       - name: Upload latest zip to Cloudflare R2
         env:
