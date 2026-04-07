@@ -13,8 +13,8 @@
 
 ### Downloads
 
-- GitHub Releases: `https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest`
-- Cloudflare latest download: `https://mods.965105.xyz/BanEnemyMod-latest.zip`
+- GitHub Releases: [Latest Release](https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest)
+- Cloudflare latest download: [BanEnemyMod-latest.zip](https://mods.965105.xyz/BanEnemyMod-latest.zip)
 
 ### Build
 
@@ -45,8 +45,8 @@ A player release zip contains:
 
 ### 下载地址
 
-- GitHub Releases：`https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest`
-- Cloudflare 最新下载：`https://mods.965105.xyz/BanEnemyMod-latest.zip`
+- GitHub Releases：[最新版本](https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest)
+- Cloudflare 最新下载：[BanEnemyMod-latest.zip](https://mods.965105.xyz/BanEnemyMod-latest.zip)
 
 ### 构建
 
