@@ -26,6 +26,7 @@ jobs:
           cp -r release/BanEnemyMod release_out/BanEnemyMod
           cd release_out
           zip -r BanEnemyMod-${GITHUB_REF_NAME}.zip BanEnemyMod
+          cp BanEnemyMod-${GITHUB_REF_NAME}.zip BanEnemyMod-latest.zip
 
       - name: Create versioned release
         uses: softprops/action-gh-release@v2
@@ -81,7 +82,7 @@ jobs:
           fail_on_unmatched_files: true
           append_body: false
           overwrite_files: true
-          files: release_out/BanEnemyMod-${{ github.ref_name }}.zip
+          files: release_out/BanEnemyMod-latest.zip
           body: |
             ## English
 
@@ -107,6 +108,6 @@ jobs:
         run: |
           pip install awscli
           aws s3 cp \
-            release_out/BanEnemyMod-${GITHUB_REF_NAME}.zip \
+            release_out/BanEnemyMod-latest.zip \
             s3://slay-the-spire-2-ban-enemy-mod/BanEnemyMod-latest.zip \
             --endpoint-url https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com
