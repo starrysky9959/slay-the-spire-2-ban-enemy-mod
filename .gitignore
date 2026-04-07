@@ -11,3 +11,5 @@ packages/
 .editorconfig
 *.user
 hook_trace.log
+release/*.zip
+.wrangler/

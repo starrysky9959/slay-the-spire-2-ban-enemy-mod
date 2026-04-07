@@ -33,7 +33,10 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: ${{ github.ref_name }}
           make_latest: true
+          fail_on_unmatched_files: true
+          append_body: false
           files: release_out/BanEnemyMod-${{ github.ref_name }}.zip
+          overwrite_files: true
           body: |
             ## English
 
@@ -75,6 +78,9 @@ jobs:
           tag_name: latest
           name: latest
           make_latest: false
+          fail_on_unmatched_files: true
+          append_body: false
+          overwrite_files: true
           files: release_out/BanEnemyMod-${{ github.ref_name }}.zip
           body: |
             ## English
