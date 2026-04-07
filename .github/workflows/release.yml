@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  build-and-release:
+  package-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,24 +19,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "9.0.x"
-
-      - name: Restore
-        run: dotnet restore
-
-      - name: Build
-        run: dotnet build --configuration Release -p:ModsPath=${{ github.workspace }}/dist/mods
-
       - name: Prepare package
         shell: bash
         run: |
-          mkdir -p release_out/BanEnemyMod
-          cp dist/mods/BanEnemyMod/BanEnemyMod.dll release_out/BanEnemyMod/
-          cp dist/mods/BanEnemyMod/BanEnemyMod.json release_out/BanEnemyMod/
-          cp dist/mods/BanEnemyMod/BanEnemyMod.pck release_out/BanEnemyMod/
+          mkdir -p release_out
+          cp -r release/BanEnemyMod release_out/BanEnemyMod
           cd release_out
           zip -r BanEnemyMod-${GITHUB_REF_NAME}.zip BanEnemyMod
 
