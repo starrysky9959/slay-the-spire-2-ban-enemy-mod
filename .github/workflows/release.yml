@@ -1,0 +1,118 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release -p:ModsPath=${{ github.workspace }}/dist/mods
+
+      - name: Prepare package
+        shell: bash
+        run: |
+          mkdir -p release_out/BanEnemyMod
+          cp dist/mods/BanEnemyMod/BanEnemyMod.dll release_out/BanEnemyMod/
+          cp dist/mods/BanEnemyMod/BanEnemyMod.json release_out/BanEnemyMod/
+          cp dist/mods/BanEnemyMod/BanEnemyMod.pck release_out/BanEnemyMod/
+          cd release_out
+          zip -r BanEnemyMod-${GITHUB_REF_NAME}.zip BanEnemyMod
+
+      - name: Create versioned release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          make_latest: true
+          files: release_out/BanEnemyMod-${{ github.ref_name }}.zip
+          body: |
+            ## English
+
+            ### Install
+
+            1. Download `BanEnemyMod-${{ github.ref_name }}.zip`.
+            2. Extract the included `BanEnemyMod` folder into `Slay the Spire 2/mods/`.
+            3. Launch the game.
+            4. On character select, click `Ban Enemy` or press `B`.
+
+            ### Downloads
+
+            - GitHub latest release: https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest
+            - Cloudflare direct download: https://slay-the-spire-2-ban-enemy-mod.r2.dev/BanEnemyMod-latest.zip
+
+            ## 中文
+
+            ### 安装
+
+            1. 下载 `BanEnemyMod-${{ github.ref_name }}.zip`。
+            2. 将其中的 `BanEnemyMod` 文件夹解压到 `Slay the Spire 2/mods/`。
+            3. 启动游戏。
+            4. 在角色选择界面点击 `Ban Enemy / 禁用敌人`，或直接按 `B`。
+
+            ### 下载地址
+
+            - GitHub 最新版本：https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest
+            - Cloudflare 直链：https://slay-the-spire-2-ban-enemy-mod.r2.dev/BanEnemyMod-latest.zip
+
+      - name: Move latest tag
+        shell: bash
+        run: |
+          git tag -f latest
+          git push origin refs/tags/latest --force
+
+      - name: Create latest release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: latest
+          make_latest: false
+          files: release_out/BanEnemyMod-${{ github.ref_name }}.zip
+          body: |
+            ## English
+
+            This release always points to the newest build.
+
+            Direct download:
+            https://slay-the-spire-2-ban-enemy-mod.r2.dev/BanEnemyMod-latest.zip
+
+            ## 中文
+
+            这个 release 永远指向当前最新版本。
+
+            直链下载：
+            https://slay-the-spire-2-ban-enemy-mod.r2.dev/BanEnemyMod-latest.zip
+
+      - name: Upload latest zip to Cloudflare R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          R2_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_R2_ACCOUNT_ID }}
+        run: |
+          pip install awscli
+          aws s3 cp \
+            release_out/BanEnemyMod-${GITHUB_REF_NAME}.zip \
+            s3://slay-the-spire-2-ban-enemy-mod/BanEnemyMod-latest.zip \
+            --endpoint-url https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com
