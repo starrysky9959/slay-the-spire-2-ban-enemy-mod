@@ -92,12 +92,12 @@ jobs:
             https://slay-the-spire-2-ban-enemy-mod.r2.dev/BanEnemyMod-latest.zip
 
       - name: Upload latest zip to Cloudflare R2
-        if: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID != '' && secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY != '' && secrets.CLOUDFLARE_R2_ACCOUNT_ID != '' }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
           R2_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_R2_ACCOUNT_ID }}
+        if: ${{ env.AWS_ACCESS_KEY_ID != '' && env.AWS_SECRET_ACCESS_KEY != '' && env.R2_ACCOUNT_ID != '' }}
         run: |
           pip install awscli
           aws s3 cp \
