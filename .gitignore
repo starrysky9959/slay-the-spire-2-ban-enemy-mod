@@ -1,0 +1,13 @@
+.godot/
+bin/
+/android/
+.git/
+.idea/
+.vs/
+publish/
+Properties/
+packages/
+.tools/
+.editorconfig
+*.user
+hook_trace.log

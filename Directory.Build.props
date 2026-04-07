@@ -1,0 +1,11 @@
+<Project>
+    <PropertyGroup>
+        <!-- Build works without Godot. Set this before running `dotnet publish` to export a final .pck. -->
+        <GodotPath></GodotPath>
+
+        <!-- Explicit path so WSL builds resolve the Windows Steam library correctly. -->
+        <Sts2Path>/mnt/d/SteamLibrary/steamapps/common/Slay the Spire 2</Sts2Path>
+        <Sts2DataDir>/mnt/d/SteamLibrary/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64</Sts2DataDir>
+        <ModsPath>/mnt/d/SteamLibrary/steamapps/common/Slay the Spire 2/mods/</ModsPath>
+    </PropertyGroup>
+</Project>
