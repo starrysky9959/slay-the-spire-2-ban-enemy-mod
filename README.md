@@ -6,13 +6,14 @@
 
 ### Install
 
-1. Download the latest release zip from GitHub Releases.
+1. Download the latest release zip from Nexus Mods, GitHub Releases, or Cloudflare.
 2. Extract the included `BanEnemyMod` folder into your `Slay the Spire 2/mods/` directory.
 3. Launch the game.
 4. On character select, click `Ban Enemy` or press `B`.
 
 ### Downloads
 
+- Nexus Mods: [Ban Enemy Mod](https://www.nexusmods.com/slaythespire2/mods/473)
 - GitHub Releases: [Latest Release](https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest)
 - Cloudflare latest download: [BanEnemyMod-latest.zip](https://mods.965105.xyz/BanEnemyMod-latest.zip)
 
@@ -41,13 +42,14 @@ A player release zip contains:
 
 ### 安装
 
-1. 从 GitHub Releases 下载最新版本压缩包。
+1. 从 Nexus Mods、GitHub Releases 或 Cloudflare 下载最新版本压缩包。
 2. 将压缩包中的 `BanEnemyMod` 文件夹解压到 `Slay the Spire 2/mods/` 目录。
 3. 启动游戏。
 4. 在角色选择界面点击 `Ban Enemy / 禁用敌人`，或直接按 `B`。
 
 ### 下载地址
 
+- Nexus Mods：[Ban Enemy Mod](https://www.nexusmods.com/slaythespire2/mods/473)
 - GitHub Releases：[最新版本](https://github.com/starrysky9959/slay-the-spire-2-ban-enemy-mod/releases/latest)
 - Cloudflare 最新下载：[BanEnemyMod-latest.zip](https://mods.965105.xyz/BanEnemyMod-latest.zip)
 
