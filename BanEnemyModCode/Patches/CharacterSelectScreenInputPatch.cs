@@ -1,3 +1,4 @@
+using BanEnemyMod.BanEnemyModCode.UI;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using Godot;
@@ -18,5 +19,9 @@ internal static class CharacterSelectScreenInputPatch
         {
             return;
         }
+
+        BanEncounterSelectionLayer layer = CharacterSelectScreenReadyPatch.EnsureLayer(__instance);
+        layer.ToggleLayer();
+        __instance.GetViewport().SetInputAsHandled();
     }
 }

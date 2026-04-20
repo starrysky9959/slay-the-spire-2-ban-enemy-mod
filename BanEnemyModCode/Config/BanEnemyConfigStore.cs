@@ -23,9 +23,15 @@ internal static class BanEnemyConfigStore
     {
         get
         {
+            string roamingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            if (!string.IsNullOrWhiteSpace(roamingPath))
+            {
+                return Path.Combine(roamingPath, "SlayTheSpire2", "ModConfig", MainFile.ModId, "ban_enemy_config.json");
+            }
+
             string assemblyLocation = Assembly.GetExecutingAssembly().Location;
             string? directory = Path.GetDirectoryName(assemblyLocation);
-            return Path.Combine(directory ?? AppContext.BaseDirectory, "ban_enemy_config.json");
+            return Path.Combine(directory ?? AppContext.BaseDirectory, "config", "ban_enemy_config.json");
         }
     }
 
@@ -187,8 +193,42 @@ internal static class BanEnemyConfigStore
 
     private static BanEnemyConfig EnsureLoaded()
     {
-        _config ??= BanEnemyConfig.Load(ConfigPath);
+        _config ??= LoadConfigWithMigration();
         return _config;
+    }
+
+    private static BanEnemyConfig LoadConfigWithMigration()
+    {
+        string configPath = ConfigPath;
+        string legacyConfigPath = GetLegacyConfigPath();
+
+        if (!File.Exists(configPath) && File.Exists(legacyConfigPath))
+        {
+            try
+            {
+                string? directory = Path.GetDirectoryName(configPath);
+                if (!string.IsNullOrWhiteSpace(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                File.Copy(legacyConfigPath, configPath, overwrite: false);
+                HookTrace.Write($"Migrated config from legacy path to roaming config. path={configPath}");
+            }
+            catch (Exception ex)
+            {
+                HookTrace.Write($"Failed to migrate config from legacy path: {ex}");
+            }
+        }
+
+        return BanEnemyConfig.Load(configPath);
+    }
+
+    private static string GetLegacyConfigPath()
+    {
+        string assemblyLocation = Assembly.GetExecutingAssembly().Location;
+        string? directory = Path.GetDirectoryName(assemblyLocation);
+        return Path.Combine(directory ?? AppContext.BaseDirectory, "ban_enemy_config.json");
     }
 
     private static HashSet<string> GetCurrentBannedEncounterIdsLocked()

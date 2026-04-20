@@ -106,18 +106,18 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
             Text = BanEnemyText.Get("title"),
             SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
         };
-        _titleLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _titleLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         header.AddChild(_titleLabel);
 
         _countLabel = new Label();
-        _countLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _countLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         root.AddChild(_countLabel);
 
         _modeLabel = new Label
         {
             AutowrapMode = TextServer.AutowrapMode.WordSmart
         };
-        _modeLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _modeLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         root.AddChild(_modeLabel);
 
         _warningLabel = new Label
@@ -125,7 +125,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
             Visible = false,
             AutowrapMode = TextServer.AutowrapMode.WordSmart
         };
-        _warningLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _warningLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         _warningLabel.Modulate = new Color(1f, 0.72f, 0.3f, 1f);
         root.AddChild(_warningLabel);
 
@@ -133,7 +133,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
         {
             AutowrapMode = TextServer.AutowrapMode.WordSmart
         };
-        _ruleHintLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _ruleHintLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         _ruleHintLabel.Modulate = new Color(0.85f, 0.85f, 0.85f, 0.95f);
         root.AddChild(_ruleHintLabel);
 
@@ -141,7 +141,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
         {
             PlaceholderText = BanEnemyText.Get("search.placeholder")
         };
-        _searchInput.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.LineEdit.font);
+        _searchInput.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.LineEdit.Font);
         _searchInput.CustomMinimumSize = new Vector2(0, 44);
         _searchInput.TextChanged += _ => RefreshTree();
         root.AddChild(_searchInput);
@@ -155,7 +155,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
             Text = BanEnemyText.Get("select_all"),
             CustomMinimumSize = new Vector2(120, 52)
         };
-        _selectAllButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _selectAllButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         _selectAllButton.AddThemeConstantOverride("h_separation", 6);
         _selectAllButton.Pressed += SelectAll;
         actions.AddChild(_selectAllButton);
@@ -165,7 +165,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
             Text = BanEnemyText.Get("deselect_all"),
             CustomMinimumSize = new Vector2(140, 52)
         };
-        _deselectAllButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _deselectAllButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         _deselectAllButton.AddThemeConstantOverride("h_separation", 6);
         _deselectAllButton.Pressed += DeselectAllSafely;
         actions.AddChild(_deselectAllButton);
@@ -175,7 +175,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
             Text = BanEnemyText.Get("close"),
             CustomMinimumSize = new Vector2(160, 52)
         };
-        _closeButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _closeButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         _closeButton.AddThemeConstantOverride("h_separation", 6);
         _closeButton.Pressed += HideLayer;
         actions.AddChild(_closeButton);
@@ -216,7 +216,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
         {
             Text = BanEnemyText.Get("preview.title")
         };
-        _previewTitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _previewTitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         previewPanel.AddChild(_previewTitle);
 
         _previewSubtitle = new Label
@@ -224,7 +224,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
             Text = BanEnemyText.Get("preview.empty"),
             AutowrapMode = TextServer.AutowrapMode.WordSmart
         };
-        _previewSubtitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _previewSubtitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         previewPanel.AddChild(_previewSubtitle);
 
         ScrollContainer previewScroll = new()
@@ -508,8 +508,8 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
         {
             _previewTitle.Text = BanEnemyText.Get("preview.title");
             _previewSubtitle.Text = BanEnemyText.Get("preview.empty");
-            _previewTitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
-            _previewSubtitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+            _previewTitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
+            _previewSubtitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
             return;
         }
 
@@ -550,7 +550,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
             Text = monsterTitle,
             AutowrapMode = TextServer.AutowrapMode.WordSmart
         };
-        title.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        title.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         content.AddChild(title);
 
         Control visualHolder = new()
@@ -584,7 +584,7 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
                 Text = $"Preview unavailable for {monsterTitle}\n{ex.Message}",
                 AutowrapMode = TextServer.AutowrapMode.WordSmart
             };
-            fallback.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+            fallback.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
             content.AddChild(fallback);
             HookTrace.Write($"Failed to create monster preview. monsterId={monsterId}, error={ex}");
         }
@@ -625,19 +625,19 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
     {
         RefreshCatalog();
         _titleLabel.Text = BanEnemyText.Get("title");
-        _titleLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
-        _countLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
-        _modeLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
-        _warningLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
-        _ruleHintLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _titleLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
+        _countLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
+        _modeLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
+        _warningLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
+        _ruleHintLabel.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         _searchInput.PlaceholderText = BanEnemyText.Get("search.placeholder");
-        _searchInput.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.LineEdit.font);
+        _searchInput.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.LineEdit.Font);
         _selectAllButton.Text = BanEnemyText.Get("select_all");
-        _selectAllButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _selectAllButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         _deselectAllButton.Text = BanEnemyText.Get("deselect_all");
-        _deselectAllButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _deselectAllButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         _closeButton.Text = BanEnemyText.Get("close");
-        _closeButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _closeButton.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
         _ruleHintLabel.Text = BanEnemyText.Get("rule_hint");
         _tree.SetColumnTitle(0, BanEnemyText.Get("column.encounter"));
         _tree.SetColumnTitle(1, BanEnemyText.Get("column.monsters"));
@@ -650,8 +650,8 @@ internal sealed partial class BanEncounterSelectionLayer : CanvasLayer
             _previewSubtitle.Text = BanEnemyText.Get("preview.empty");
         }
 
-        _previewTitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
-        _previewSubtitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.font);
+        _previewTitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
+        _previewSubtitle.ApplyLocaleFontSubstitution(FontType.Regular, ThemeConstants.Label.Font);
     }
 
     private void RefreshCatalog()

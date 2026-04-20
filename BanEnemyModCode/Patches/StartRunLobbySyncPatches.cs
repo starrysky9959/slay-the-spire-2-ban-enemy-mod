@@ -9,14 +9,25 @@ using MegaCrit.Sts2.Core.Multiplayer.Messages.Lobby;
 
 namespace BanEnemyMod.BanEnemyModCode.Patches;
 
-[HarmonyPatch(typeof(StartRunLobby), "BeginRun")]
-internal static class StartRunLobbyBeginRunCapturePatch
+[HarmonyPatch(typeof(StartRunLobby), "BeginRunForAllPlayers")]
+internal static class StartRunLobbyBeginRunForAllPlayersCapturePatch
 {
     private static void Prefix(string seed, List<ModifierModel> modifiers)
     {
         IReadOnlyList<ModifierModel> snapshot = modifiers?.ToList() ?? new List<ModifierModel>();
         BanEnemyConfigStore.CapturePendingRunModifiers(snapshot);
-        HookTrace.Write($"StartRunLobby.BeginRun captured modifiers. seed={seed}, modifierCount={snapshot.Count}");
+        HookTrace.Write($"StartRunLobby.BeginRunForAllPlayers captured modifiers. seed={seed}, modifierCount={snapshot.Count}");
+    }
+}
+
+[HarmonyPatch(typeof(StartRunLobby), "BeginRunLocally")]
+internal static class StartRunLobbyBeginRunLocallyCapturePatch
+{
+    private static void Prefix(string seed, List<ModifierModel> modifiers)
+    {
+        IReadOnlyList<ModifierModel> snapshot = modifiers?.ToList() ?? new List<ModifierModel>();
+        BanEnemyConfigStore.CapturePendingRunModifiers(snapshot);
+        HookTrace.Write($"StartRunLobby.BeginRunLocally captured modifiers. seed={seed}, modifierCount={snapshot.Count}");
     }
 }
 
